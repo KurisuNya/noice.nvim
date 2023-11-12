@@ -237,8 +237,7 @@ function M.keys(buf)
     end, { buffer = buf, silent = true })
   end
 
-  map("gx")
-  map("K")
+  map("H")
 
   vim.b[buf].markdown_keys = true
 end
