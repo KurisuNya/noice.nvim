@@ -214,6 +214,10 @@ function M.keys(buf)
     return
   end
 
+  local function to_table(value)
+    return type(value) ~= "table" and { value } or value
+  end
+
   local function map(lhs)
     vim.keymap.set("n", lhs, function()
       local line = vim.api.nvim_get_current_line()
@@ -237,7 +241,9 @@ function M.keys(buf)
     end, { buffer = buf, silent = true })
   end
 
-  map("H")
+  for _, lhs in ipairs(to_table(Config.options.markdown.open_link_keys)) do
+    map(lhs)
+  end
 
   vim.b[buf].markdown_keys = true
 end

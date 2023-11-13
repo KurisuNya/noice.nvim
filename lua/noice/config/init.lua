@@ -168,6 +168,7 @@ function M.defaults()
         ["|(%S-)|"] = vim.cmd.help, -- vim help links
         ["%[.-%]%((%S-)%)"] = require("noice.util").open, -- markdown links
       },
+      open_link_keys = { "K", "gx" },
       highlights = {
         ["|%S-|"] = "@text.reference",
         ["@%S+"] = "@parameter",
