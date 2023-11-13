@@ -166,7 +166,7 @@ function M.defaults()
     markdown = {
       hover = {
         ["|(%S-)|"] = vim.cmd.help, -- vim help links
-        ["%[.-%]%((%S-)%)"] = require("noice.util").open, -- markdown links
+        ["%[.-%]%((http%S-)%)"] = require("noice.util").open, -- markdown links
       },
       open_link_keys = { "K", "gx" },
       highlights = {
