@@ -67,7 +67,7 @@ require("noice").setup({
     override = {
       ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
       ["vim.lsp.util.stylize_markdown"] = true,
-      ["cmp.entry.get_documentation"] = true,
+      ["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
     },
   },
   -- you can enable a preset for easier configuration
@@ -366,7 +366,7 @@ Check the [wiki](https://github.com/folke/noice.nvim/wiki/Configuration-Recipes)
 | **min_length** | `number`               | minimum length of the message (total width of all the lines)                                                             |
 | **min_width**  | `number`               | minimum width of the message                                                                                             |
 | **mode**       | `string`               | checks if `vim.api.nvim_get_mode()` contains the given mode                                                              |
-| **not**        | `filter`               | checks wether the filter matches or not                                                                                  |
+| **not**        | `filter`               | checks whether the filter matches or not                                                                                 |
 | **warning**    | `boolean`              | all warning-like kinds from `ext_messages`                                                                               |
 
 <details>
