@@ -27,7 +27,7 @@ Check this [tracking issue](https://github.com/folke/noice.nvim/issues/6) for a 
 
 ## ⚡️ Requirements
 
-- Neovim >= 0.8.0 **_(nightly highly recommended)_**
+- Neovim >= 0.9.0 **_(nightly highly recommended)_**
 - [nui.nvim](https://github.com/MunifTanjim/nui.nvim): used for proper rendering and multiple views
 - [nvim-notify](https://github.com/rcarriga/nvim-notify): notification view _**(optional)**_
 - a [Nerd Font](https://www.nerdfonts.com/) **_(optional)_**
@@ -191,6 +191,12 @@ Check the [wiki](https://github.com/folke/noice.nvim/wiki/Configuration-Recipes)
       opts = { enter = true, format = "details" },
       filter = { error = true },
       filter_opts = { reverse = true },
+    },
+    all = {
+      -- options for the message history that you get with `:Noice`
+      view = "split",
+      opts = { enter = true, format = "details" },
+      filter = {},
     },
   },
   notify = {

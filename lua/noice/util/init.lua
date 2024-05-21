@@ -5,9 +5,24 @@ local Config = require("noice.config")
 
 local M = {}
 
+M.islist = vim.islist or vim.tbl_islist
+
 M.stats = require("noice.util.stats")
 M.call = require("noice.util.call")
 M.nui = require("noice.util.nui")
+
+function M.t(str)
+  return vim.api.nvim_replace_termcodes(str, true, true, true)
+end
+
+M.CR = M.t("<cr>")
+M.ESC = M.t("<esc>")
+M.BS = M.t("<bs>")
+M.EXIT = M.t("<C-\\><C-n>")
+M.LUA_CALLBACK = "\x80\253g"
+M.RIGHT = M.t("<right>")
+M.LEFT = M.t("<left>")
+M.CMD = "\x80\253h"
 
 ---@generic F: fun()
 ---@param fn F
@@ -308,7 +323,17 @@ function M.info(msg, ...)
   M.notify(msg, vim.log.levels.INFO, ...)
 end
 
+---@param data any
 function M.debug(data)
+  if not Config.options.debug then
+    return
+  end
+  if type(data) == "function" then
+    data = data()
+  end
+  if type(data) ~= "string" then
+    data = vim.inspect(data)
+  end
   local file = "./noice.log"
   local fd = io.open(file, "a+")
   if not fd then
