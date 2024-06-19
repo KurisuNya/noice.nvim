@@ -1,5 +1,20 @@
 # Changelog
 
+## [4.2.2](https://github.com/folke/noice.nvim/compare/v4.2.1...v4.2.2) (2024-06-16)
+
+
+### Bug Fixes
+
+* **hover:** ignore invalid markup. Fixes [#819](https://github.com/folke/noice.nvim/issues/819) ([59e633f](https://github.com/folke/noice.nvim/commit/59e633ff95be85cf65ac5dc5ece2a89c2b6c403d))
+* **msg:** clear existing confirm messages. Fixes [#302](https://github.com/folke/noice.nvim/issues/302) ([d3d8329](https://github.com/folke/noice.nvim/commit/d3d83292c15cb8a72e1e421ddf5a0aac7812cb9c))
+
+## [4.2.1](https://github.com/folke/noice.nvim/compare/v4.2.0...v4.2.1) (2024-06-15)
+
+
+### Bug Fixes
+
+* **cmdline:** only use cmdline_input for short prompts without newline. Fixes [#856](https://github.com/folke/noice.nvim/issues/856) ([d46c4ba](https://github.com/folke/noice.nvim/commit/d46c4ba67670037bc67af843b95314749caeebf8))
+
 ## [4.2.0](https://github.com/folke/noice.nvim/compare/v4.1.0...v4.2.0) (2024-06-13)
 
 
