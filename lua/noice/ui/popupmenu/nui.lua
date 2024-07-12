@@ -1,12 +1,12 @@
 local require = require("noice.util.lazy")
 
-local Util = require("noice.util")
-local Config = require("noice.config")
-local Menu = require("nui.menu")
 local Api = require("noice.api")
+local Config = require("noice.config")
+local Highlights = require("noice.config.highlights")
+local Menu = require("nui.menu")
 local NuiLine = require("nui.line")
 local Scrollbar = require("noice.view.scrollbar")
-local Highlights = require("noice.config.highlights")
+local Util = require("noice.util")
 
 local M = {}
 ---@type NuiMenu|NuiTree
@@ -206,12 +206,11 @@ function M.show(state)
     M.create(items, opts)
   end
 
+  M.on_select(state, false)
   -- redraw is needed when in blocking mode
   if Util.is_blocking() then
     Util.redraw()
   end
-
-  M.on_select(state)
 end
 
 ---@param opts _.NuiPopupOptions
@@ -225,11 +224,15 @@ function M.create(items, opts)
   if M.menu.border then
     Util.tag(M.menu.border.bufnr, "popupmenu.border")
   end
+  vim.wo[M.menu.winid].cursorline = false
 
-  M.scroll = Scrollbar({
-    winnr = M.menu.winid,
-    padding = Util.nui.normalize_padding(opts.border),
-  })
+  if opts.scrollbar ~= false then
+    M.scroll = Scrollbar({
+      winnr = M.menu.winid,
+      padding = Util.nui.normalize_padding(opts.border),
+    })
+    M.scroll:mount()
+  end
   M.scroll:mount()
 end
 
@@ -239,10 +242,19 @@ function M.on_show(state)
 end
 
 ---@param state Popupmenu
-function M.on_select(state)
-  if M.menu and state.selected ~= -1 then
-    vim.api.nvim_win_set_cursor(M.menu.winid, { state.selected + 1, 0 })
-    vim.api.nvim_exec_autocmds("WinScrolled", { modeline = false })
+---@param redraw? boolean
+function M.on_select(state, redraw)
+  if M.menu then
+    if state.selected == -1 then
+      vim.wo[M.menu.winid].cursorline = false
+    else
+      vim.wo[M.menu.winid].cursorline = true
+      vim.api.nvim_win_set_cursor(M.menu.winid, { state.selected + 1, 0 })
+      vim.api.nvim_exec_autocmds("WinScrolled", { modeline = false })
+      if redraw ~= false and Util.is_blocking() then
+        Util.redraw()
+      end
+    end
   end
 end
 

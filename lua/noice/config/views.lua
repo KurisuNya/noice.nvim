@@ -1,7 +1,7 @@
 local require = require("noice.util.lazy")
 
-local Util = require("noice.util")
 local Config = require("noice.config")
+local Util = require("noice.util")
 
 local M = {}
 
@@ -241,7 +241,7 @@ M.defaults = {
     zindex = 210,
     format = { "{confirm}" },
     position = {
-      row = "50%",
+      row = 3,
       col = "50%",
     },
     size = "auto",
