@@ -118,6 +118,16 @@ function M.on_attach(buf, client)
           callback = callback,
         })
       end
+      if Config.options.lsp.signature.auto_open.snipppets then
+        vim.api.nvim_create_autocmd("ModeChanged", {
+          buffer = buf,
+          callback = function(ev)
+            if ev.match == "v:s" then
+              callback(ev)
+            end
+          end,
+        })
+      end
     end
   end
 end
