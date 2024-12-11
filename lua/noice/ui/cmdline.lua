@@ -269,6 +269,7 @@ function M.on_render(_, buf, line, byte)
       col = pos.col - 1,
     },
   }
+  vim.g.ui_cmdline_pos = M.position.screenpos
   pcall(M.fix_cursor)
 end
 
