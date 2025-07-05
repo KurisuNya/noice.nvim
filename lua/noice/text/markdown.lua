@@ -240,8 +240,12 @@ function M.keys(buf)
     end, { buffer = buf, silent = true })
   end
 
-  map("gx")
-  map("K")
+  local function to_table(value)
+    return type(value) ~= "table" and { value } or value
+  end
+  for _, lhs in ipairs(to_table(Config.options.markdown.open_keys)) do
+    map(lhs)
+  end
 
   vim.b[buf].markdown_keys = true
 end
